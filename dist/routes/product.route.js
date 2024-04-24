@@ -8,8 +8,8 @@ const express_1 = require("express");
 const auth_middleware_1 = __importDefault(require("../middlewares/auth.middleware"));
 function ProductRoutes(productController) {
     const router = (0, express_1.Router)();
-    router.get('/', auth_middleware_1.default, productController.getAll.bind(productController));
-    router.get('/:id', auth_middleware_1.default, productController.getById.bind(productController));
+    router.get('/', productController.getAll.bind(productController));
+    router.get('/:id', productController.getById.bind(productController));
     router.post('/', auth_middleware_1.default, productController.create.bind(productController));
     router.put('/:id', auth_middleware_1.default, productController.update.bind(productController));
     router.delete('/:id', auth_middleware_1.default, productController.delete.bind(productController));

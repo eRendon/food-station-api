@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const secretKey_1 = __importDefault(require("../const/secretKey"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
 class UserController {
     constructor(userRepository) {
         this.userRepository = userRepository;
@@ -22,11 +24,11 @@ class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { username, password, email, rol } = req.body;
-                yield this.userRepository.create({ username, password, email, rol });
+                const hashedPassword = yield bcrypt_1.default.hash(password, 10);
+                yield this.userRepository.create({ username, password: hashedPassword, email, rol });
                 res.status(201).json({ message: 'User created successfully' });
             }
             catch (error) {
-                console.error(error);
                 res.status(500).json({ error: 'Internal Server Error' });
             }
         });
@@ -35,12 +37,15 @@ class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const { email, password } = req.body;
-                const user = yield this.userRepository.findUserByUsername(email, password);
-                console.log('el usuario ssss');
+                const user = yield this.userRepository.findUserByUsername(email);
                 if (!user) {
-                    return res.status(401).json({ error: 'Invalid credentials' });
+                    return res.status(401).json({ error: 'Invalid username or password' });
                 }
-                const token = jsonwebtoken_1.default.sign({ userId: user.id }, 'secret_key', { expiresIn: '24h' });
+                const isPasswordValid = yield bcrypt_1.default.compare(password, user.password);
+                if (!isPasswordValid) {
+                    return res.status(401).json({ error: 'Invalid username or password' });
+                }
+                const token = jsonwebtoken_1.default.sign({ userId: user.id }, secretKey_1.default, { expiresIn: '24h' });
                 const responseData = {
                     username: user === null || user === void 0 ? void 0 : user.username,
                     email: user === null || user === void 0 ? void 0 : user.email,

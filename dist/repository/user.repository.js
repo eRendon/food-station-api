@@ -21,15 +21,14 @@ class UserRepository {
                 return yield user_model_1.default.create({ username, password, email, rol });
             }
             catch (error) {
-                console.log(error);
                 throw new Error('Unable to create user');
             }
         });
     }
-    findUserByUsername(email, password) {
+    findUserByUsername(email) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield user_model_1.default.findOne({ where: { email, password } });
+                return yield user_model_1.default.findOne({ where: { email } });
             }
             catch (error) {
                 throw new Error('Unable to find user');

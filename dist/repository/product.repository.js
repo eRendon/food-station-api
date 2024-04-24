@@ -17,7 +17,6 @@ const product_model_1 = __importDefault(require("../models/product.model"));
 class SequelizeProductRepository {
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('hola mundo');
             return product_model_1.default.findAll();
         });
     }

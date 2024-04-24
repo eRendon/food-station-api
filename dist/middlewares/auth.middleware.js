@@ -6,9 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const secretKey_1 = __importDefault(require("../const/secretKey"));
 const authenticateToken = (req, res, Next) => {
-    console.log('el req en mdle', req);
     const authHeader = req.headers['authorization'];
-    console.log('authsssss', authHeader);
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ message: 'Token de autenticación no proporcionado o en formato incorrecto' });
     }

@@ -25,7 +25,6 @@ app.use((0, cors_1.default)({
 }));
 app.use('/api/products', (0, product_route_1.ProductRoutes)(productController));
 app.use('/api/users', (0, user_route_1.UserRoutes)(userController));
-console.log(app.routes);
 app.listen(port, () => {
     db_1.default.sync({ force: false })
         .then(() => {
