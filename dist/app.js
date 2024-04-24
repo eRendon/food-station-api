@@ -21,7 +21,7 @@ const app = (0, express_1.default)();
 const port = 3000;
 app.use(body_parser_1.default.json());
 app.use((0, cors_1.default)({
-    origin: ['http://localhost:3000', 'http://localhost:49204', 'https://food-station.vercel.app']
+    origin: ['http://localhost:3000', 'http://localhost:61295', 'https://food-station.vercel.app']
 }));
 app.use('/api/products', (0, product_route_1.ProductRoutes)(productController));
 app.use('/api/users', (0, user_route_1.UserRoutes)(userController));

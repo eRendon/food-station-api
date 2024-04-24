@@ -36,7 +36,7 @@ class UserController {
             try {
                 const { email, password } = req.body;
                 const user = yield this.userRepository.findUserByUsername(email, password);
-                console.log('el usuario');
+                console.log('el usuario ssss');
                 if (!user) {
                     return res.status(401).json({ error: 'Invalid credentials' });
                 }

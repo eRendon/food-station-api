@@ -31,12 +31,10 @@ export class ProductController {
 
   async create(req: Request, res: Response): Promise<void> {
     try {
-      console.log(req)
       const productData: IProductAttributes = req.body;
       const product = await this.productRepository.create(<IProductInstance>productData);
       res.status(201).json(product);
     } catch (error) {
-      console.log(error)
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }

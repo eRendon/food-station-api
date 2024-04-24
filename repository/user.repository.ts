@@ -7,14 +7,13 @@ export class UserRepository implements IUserDeclarations {
     try {
       return await User.create({ username, password, email, rol });
     } catch (error) {
-      console.log(error)
       throw new Error('Unable to create user');
     }
   }
 
-  async findUserByUsername(email: string, password: string): Promise<UserAttributes | null> {
+  async findUserByUsername(email: string): Promise<UserAttributes | null> {
     try {
-      return await User.findOne({ where: { email, password } });
+      return await User.findOne({ where: { email } });
     } catch (error) {
       throw new Error('Unable to find user');
     }

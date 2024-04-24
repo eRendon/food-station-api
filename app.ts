@@ -20,12 +20,12 @@ app.use(bodyParser.json())
 
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:49204', 'https://food-station.vercel.app']
+  origin: ['http://localhost:3000', 'http://localhost:61295', 'https://food-station.vercel.app']
 }));
 
 app.use('/api/products', ProductRoutes(productController));
 app.use('/api/users', UserRoutes(userController))
-console.log(app.routes)
+
 app.listen(port, () => {
   sequelizeApp.sync({ force: false})
   .then( () => {

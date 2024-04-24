@@ -16,7 +16,9 @@ class ProductController {
     }
     getAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('reques en controller', req);
             try {
+                console.log(req);
                 const products = yield this.productRepository.findAll();
                 yield res.status(200).json(products);
             }
@@ -27,6 +29,7 @@ class ProductController {
     }
     getById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('getid');
             try {
                 const id = parseInt(req.params.id);
                 const product = yield this.productRepository.findById(id);
@@ -44,6 +47,7 @@ class ProductController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('create');
             try {
                 console.log(req);
                 const productData = req.body;
@@ -58,6 +62,7 @@ class ProductController {
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('update');
             try {
                 const id = parseInt(req.params.id);
                 const productData = req.body;
@@ -76,6 +81,7 @@ class ProductController {
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('edele');
             try {
                 const id = parseInt(req.params.id);
                 const success = yield this.productRepository.delete(id);
